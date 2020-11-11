@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/spl211/CLionProjects/ass1/include/Graph.h
+vector
+-
+
+/home/spl211/CLionProjects/ass1/src/Graph.cpp
+../include/Graph.h
+/home/spl211/CLionProjects/ass1/include/Graph.h
+
