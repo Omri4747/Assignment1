@@ -170,6 +170,33 @@ src/Agent.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/Agent.cpp.s
 .PHONY : src/Agent.cpp.s
 
+src/FiveRuleTester.o: src/FiveRuleTester.cpp.o
+
+.PHONY : src/FiveRuleTester.o
+
+# target to build an object file
+src/FiveRuleTester.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/FiveRuleTester.cpp.o
+.PHONY : src/FiveRuleTester.cpp.o
+
+src/FiveRuleTester.i: src/FiveRuleTester.cpp.i
+
+.PHONY : src/FiveRuleTester.i
+
+# target to preprocess a source file
+src/FiveRuleTester.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/FiveRuleTester.cpp.i
+.PHONY : src/FiveRuleTester.cpp.i
+
+src/FiveRuleTester.s: src/FiveRuleTester.cpp.s
+
+.PHONY : src/FiveRuleTester.s
+
+# target to generate assembly for a file
+src/FiveRuleTester.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/FiveRuleTester.cpp.s
+.PHONY : src/FiveRuleTester.cpp.s
+
 src/Graph.o: src/Graph.cpp.o
 
 .PHONY : src/Graph.o
@@ -223,6 +250,33 @@ src/Session.s: src/Session.cpp.s
 src/Session.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/Session.cpp.s
 .PHONY : src/Session.cpp.s
+
+src/Tester.o: src/Tester.cpp.o
+
+.PHONY : src/Tester.o
+
+# target to build an object file
+src/Tester.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/Tester.cpp.o
+.PHONY : src/Tester.cpp.o
+
+src/Tester.i: src/Tester.cpp.i
+
+.PHONY : src/Tester.i
+
+# target to preprocess a source file
+src/Tester.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/Tester.cpp.i
+.PHONY : src/Tester.cpp.i
+
+src/Tester.s: src/Tester.cpp.s
+
+.PHONY : src/Tester.s
+
+# target to generate assembly for a file
+src/Tester.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ass1.dir/build.make CMakeFiles/ass1.dir/src/Tester.cpp.s
+.PHONY : src/Tester.cpp.s
 
 src/Tree.o: src/Tree.cpp.o
 
@@ -290,12 +344,18 @@ help:
 	@echo "... src/Agent.o"
 	@echo "... src/Agent.i"
 	@echo "... src/Agent.s"
+	@echo "... src/FiveRuleTester.o"
+	@echo "... src/FiveRuleTester.i"
+	@echo "... src/FiveRuleTester.s"
 	@echo "... src/Graph.o"
 	@echo "... src/Graph.i"
 	@echo "... src/Graph.s"
 	@echo "... src/Session.o"
 	@echo "... src/Session.i"
 	@echo "... src/Session.s"
+	@echo "... src/Tester.o"
+	@echo "... src/Tester.i"
+	@echo "... src/Tester.s"
 	@echo "... src/Tree.o"
 	@echo "... src/Tree.i"
 	@echo "... src/Tree.s"

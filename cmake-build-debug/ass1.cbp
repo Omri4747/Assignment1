@@ -93,16 +93,25 @@
 		<Unit filename="/home/spl211/CLionProjects/ass1/include/Session.h">
 			<Option target="ass1"/>
 		</Unit>
+		<Unit filename="/home/spl211/CLionProjects/ass1/include/Tester.h">
+			<Option target="ass1"/>
+		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/ass1/include/Tree.h">
 			<Option target="ass1"/>
 		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/ass1/src/Agent.cpp">
 			<Option target="ass1"/>
 		</Unit>
+		<Unit filename="/home/spl211/CLionProjects/ass1/src/FiveRuleTester.cpp">
+			<Option target="ass1"/>
+		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/ass1/src/Graph.cpp">
 			<Option target="ass1"/>
 		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/ass1/src/Session.cpp">
+			<Option target="ass1"/>
+		</Unit>
+		<Unit filename="/home/spl211/CLionProjects/ass1/src/Tester.cpp">
 			<Option target="ass1"/>
 		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/ass1/src/Tree.cpp">

@@ -130,8 +130,8 @@ void Session::simulate() {
         currCycle++;
     }
     json data;
-    data["graph:"]=g.getEdges();
-    data["infected:"]=g.getInfectedNodes();
+    data["graph"]=g.getEdges();
+    data["infected"]=g.getInfectedNodes();
     ofstream output("./output.json");
     output << data;
 }

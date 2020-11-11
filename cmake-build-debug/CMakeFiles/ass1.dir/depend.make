@@ -8,6 +8,8 @@ CMakeFiles/ass1.dir/src/Agent.cpp.o: ../include/Tree.h
 CMakeFiles/ass1.dir/src/Agent.cpp.o: ../include/json.hpp
 CMakeFiles/ass1.dir/src/Agent.cpp.o: ../src/Agent.cpp
 
+CMakeFiles/ass1.dir/src/FiveRuleTester.cpp.o: ../src/FiveRuleTester.cpp
+
 CMakeFiles/ass1.dir/src/Graph.cpp.o: ../include/Graph.h
 CMakeFiles/ass1.dir/src/Graph.cpp.o: ../src/Graph.cpp
 
@@ -17,6 +19,14 @@ CMakeFiles/ass1.dir/src/Session.cpp.o: ../include/Session.h
 CMakeFiles/ass1.dir/src/Session.cpp.o: ../include/Tree.h
 CMakeFiles/ass1.dir/src/Session.cpp.o: ../include/json.hpp
 CMakeFiles/ass1.dir/src/Session.cpp.o: ../src/Session.cpp
+
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../include/Agent.h
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../include/Graph.h
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../include/Session.h
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../include/Tester.h
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../include/Tree.h
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../include/json.hpp
+CMakeFiles/ass1.dir/src/Tester.cpp.o: ../src/Tester.cpp
 
 CMakeFiles/ass1.dir/src/Tree.cpp.o: ../include/Agent.h
 CMakeFiles/ass1.dir/src/Tree.cpp.o: ../include/Graph.h
@@ -28,6 +38,7 @@ CMakeFiles/ass1.dir/src/Tree.cpp.o: ../src/Tree.cpp
 CMakeFiles/ass1.dir/src/main.cpp.o: ../include/Agent.h
 CMakeFiles/ass1.dir/src/main.cpp.o: ../include/Graph.h
 CMakeFiles/ass1.dir/src/main.cpp.o: ../include/Session.h
+CMakeFiles/ass1.dir/src/main.cpp.o: ../include/Tester.h
 CMakeFiles/ass1.dir/src/main.cpp.o: ../include/Tree.h
 CMakeFiles/ass1.dir/src/main.cpp.o: ../include/json.hpp
 CMakeFiles/ass1.dir/src/main.cpp.o: ../src/main.cpp
