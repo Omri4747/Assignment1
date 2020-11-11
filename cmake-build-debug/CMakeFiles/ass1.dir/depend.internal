@@ -8,8 +8,6 @@ CMakeFiles/ass1.dir/src/Agent.cpp.o
  /home/spl211/CLionProjects/ass1/include/Tree.h
  /home/spl211/CLionProjects/ass1/include/json.hpp
  /home/spl211/CLionProjects/ass1/src/Agent.cpp
-CMakeFiles/ass1.dir/src/FiveRuleTester.cpp.o
- /home/spl211/CLionProjects/ass1/src/FiveRuleTester.cpp
 CMakeFiles/ass1.dir/src/Graph.cpp.o
  /home/spl211/CLionProjects/ass1/include/Graph.h
  /home/spl211/CLionProjects/ass1/src/Graph.cpp
@@ -20,14 +18,6 @@ CMakeFiles/ass1.dir/src/Session.cpp.o
  /home/spl211/CLionProjects/ass1/include/Tree.h
  /home/spl211/CLionProjects/ass1/include/json.hpp
  /home/spl211/CLionProjects/ass1/src/Session.cpp
-CMakeFiles/ass1.dir/src/Tester.cpp.o
- /home/spl211/CLionProjects/ass1/include/Agent.h
- /home/spl211/CLionProjects/ass1/include/Graph.h
- /home/spl211/CLionProjects/ass1/include/Session.h
- /home/spl211/CLionProjects/ass1/include/Tester.h
- /home/spl211/CLionProjects/ass1/include/Tree.h
- /home/spl211/CLionProjects/ass1/include/json.hpp
- /home/spl211/CLionProjects/ass1/src/Tester.cpp
 CMakeFiles/ass1.dir/src/Tree.cpp.o
  /home/spl211/CLionProjects/ass1/include/Agent.h
  /home/spl211/CLionProjects/ass1/include/Graph.h
@@ -39,7 +29,6 @@ CMakeFiles/ass1.dir/src/main.cpp.o
  /home/spl211/CLionProjects/ass1/include/Agent.h
  /home/spl211/CLionProjects/ass1/include/Graph.h
  /home/spl211/CLionProjects/ass1/include/Session.h
- /home/spl211/CLionProjects/ass1/include/Tester.h
  /home/spl211/CLionProjects/ass1/include/Tree.h
  /home/spl211/CLionProjects/ass1/include/json.hpp
  /home/spl211/CLionProjects/ass1/src/main.cpp
