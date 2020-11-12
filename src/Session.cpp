@@ -67,7 +67,7 @@ Session::Session(const Session& _session):g(_session.g),treeType(_session.treeTy
 
 /**
  * move CTR
- * @param _session: reference to the moved parameter
+ * @param _session: reference to the rvalue
  * same as copy CTR but makes the values of the moved parameter nullptr
  * notice that the reference will be deleted at the end of the method
  */
@@ -117,7 +117,7 @@ Session& Session::operator=(const Session& _session) {
 
 /**
  * move assignment operator
- * @param _session: reference to the moves parameter
+ * @param _session: reference to rvalue
  * @return const reference to the re-assigned Session
  */
 
@@ -158,18 +158,11 @@ void Session::clear() {
 }
 
 /**
- * public getter method
+ * public const getter method
  * @return: Graph field
  */
 
 Graph Session::getGraph() const {return g;}
-
-/**
- * public const getter method
- * @return: agents field
- */
-
-vector<Agent*> Session::getAgents() const {return agents;}
 
 /**
  * public const getter method
@@ -182,7 +175,7 @@ TreeType Session::getTreeType() const {return treeType;}
 void Session::setGraph(const Graph &graph) {g=graph;}
 
 /**
- * @param agent: agent to add
+ * @param agent: const reference to the agent to add
  * uses the clone() method to create the agent on the heap and store the pointer in the agents field
  */
 
@@ -200,7 +193,7 @@ int Session::nextHealthyNeighbor(int nodeInd) {return g.nextHealthyNeighbor(node
 
 /**
  * after Contact tracer trace tree, need to cut the chain of infection,
- * by disconnect the  node from all of its neighbors
+ * by disconnect the node from all of its neighbors
  * @param toRemove: node to disconnect from all its neighbors
  */
 
