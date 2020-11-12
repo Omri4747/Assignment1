@@ -112,44 +112,27 @@ MaxRankTree::MaxRankTree(int rootLabel)
     :Tree(rootLabel) {}
 
 int MaxRankTree::traceTree() {
-    Tree* root = this;
-    map<int,int> ranksMap ={};
-    map<int,int> depthMap ={};
-    depthMap.insert({getRoot(),0});
-    ranksMap.insert({getRoot(),0});
-    queue<Tree*> Q = queue<Tree*>();
+    Tree *root = this;
+    int output = root->getRoot();
+    int maxRank = (int) getChildren().size();
+    queue<Tree *> Q = queue<Tree *>();
     Q.push(root);
-    while (!Q.empty()){
-        Tree* u = Q.front();
+    while (!Q.empty()) {
+        Tree *u = Q.front();
         Q.pop();
         for (int i = 0; i < (int) u->getChildren().size(); ++i) {
-                ranksMap[u->getRoot()]++;
-                Tree* nextNeighbor = u->getChildren()[i];
-                depthMap.insert({nextNeighbor->getRoot(),depthMap[u->getRoot()]+1});
-                ranksMap.insert({nextNeighbor->getRoot(),0});
-                Q.push(nextNeighbor);
-        }
-    }
-    map<int,int>::iterator itr;
-    int output = root->getRoot();
-    for (itr = ranksMap.begin(); itr != ranksMap.end() ; itr++) {
-        if (ranksMap[output] < ranksMap[itr->first]) {  //itr->first has more children than output
-            output = itr->first;
-        }
-        else if(ranksMap[output] == ranksMap[itr->first]) {   //itr->first and output has same num of children
-            if (depthMap[output] > depthMap[itr->first]) { //itr-first is closer to the root
-                output = itr->first;
-            } else if (depthMap[output] == depthMap[itr->first]) {    //output and itr-first are in the same depth
-                if (output > itr->first)    //checks if output is bigger or smaller (smaller is most left child)
-                    output = itr->first;
+            if (maxRank < (int) getChildren()[i]->getChildren().size()) {
+                maxRank = (int) getChildren()[i]->getChildren().size();
+                output = i;
             }
+            Tree *nextNeighbor = u->getChildren()[i];
+            Q.push(nextNeighbor);
         }
     }
     return output;
 }
 
 //RootTree constructor
-RootTree::RootTree(int rootLabel)
-    :Tree(rootLabel) {}
+RootTree::RootTree(int rootLabel):Tree(rootLabel) {}
 
 int RootTree::traceTree() {return getRoot();}

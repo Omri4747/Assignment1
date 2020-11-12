@@ -17,8 +17,8 @@ using namespace std;
  * 5. infectedQueue(Queue- include package in Session.h) stores the infected nodes each cycle
  */
 
-Session::Session(const string &path):g(vector<vector<int>>()),  treeType(),
-                    agents(vector<Agent*>()),   currCycle(0),   infectedQueue(queue<int>()){
+Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
+                    agents(vector<Agent*>()),currCycle(0), infectedQueue(queue<int>()), finishedViruses(vector<bool>()){
 
     //from path- convert the json file to accessible object- see documentation of nlohman at json.hpp
     json data;
@@ -44,6 +44,7 @@ Session::Session(const string &path):g(vector<vector<int>>()),  treeType(),
         }
         else{
             Virus toAdd = Virus(data["agents"][i][1]); //Virus CTR
+            finishedViruses.push_back(false);
             addAgent(toAdd); // uses Virus clone() method to init values on the heap
             g.makeCarrier(data["agents"][i][1]); // makes the first node carrier
         }
@@ -59,7 +60,8 @@ Session::Session(const string &path):g(vector<vector<int>>()),  treeType(),
  */
 
 Session::Session(const Session& _session):g(_session.g),treeType(_session.treeType),agents(vector<Agent *>()),
-                                            currCycle(_session.currCycle),infectedQueue(_session.infectedQueue) {
+                                            currCycle(_session.currCycle),infectedQueue(_session.infectedQueue),
+                                            finishedViruses(_session.finishedViruses) {
     for (Agent *agent : _session.agents) {
         addAgent(*agent);
     }
@@ -73,7 +75,8 @@ Session::Session(const Session& _session):g(_session.g),treeType(_session.treeTy
  */
 
 Session::Session(Session&& _session):g(_session.g),treeType(_session.treeType),agents(_session.agents),
-                                     currCycle(_session.currCycle),infectedQueue(_session.infectedQueue) {
+                                     currCycle(_session.currCycle),infectedQueue(_session.infectedQueue),
+                                     finishedViruses(_session.finishedViruses) {
     for (int i = 0; i < (int) agents.size(); ++i) {
         _session.agents[i]=nullptr;
     }
@@ -103,6 +106,7 @@ Session& Session::operator=(const Session& _session) {
         treeType = _session.treeType;
         currCycle = _session.currCycle;
         infectedQueue = _session.infectedQueue;
+        finishedViruses = _session.finishedViruses;
 
         //delete old values (agents) from the heap
         clear();
@@ -130,6 +134,7 @@ const Session& Session::operator=(Session&& _session) {
         treeType = _session.treeType;
         currCycle = _session.currCycle;
         infectedQueue = _session.infectedQueue;
+        finishedViruses = _session.finishedViruses;
 
         //delete old values (agents) from the heap
         clear();
@@ -211,16 +216,18 @@ void Session::makeCarrier(int nodeInd) {
     g.makeCarrier(nodeInd);
     Virus toAdd = Virus(nodeInd);
     addAgent(toAdd);
+    finishedViruses.push_back(false);
 }
 
 void Session::simulate() {
-    while (!allVirusFinished()){
+    while (!finishedViruses.empty()){
         int currAgentsSize = (int) agents.size();
         for (int i = 0; i < currAgentsSize; ++i) {
             agents[i]->act(*this);
         }
         currCycle++;
     }
+
     json data;
     data["graph"]=g.getEdges();
     data["infected"]=g.getInfectedNodes();
@@ -230,9 +237,8 @@ void Session::simulate() {
 
 bool Session::allVirusFinished() {
     bool output= true;
-    for (int i = 0; output && i < (int) agents.size(); ++i) {
-            if (!agents[i]->getFinished())
-                output = false;
+    for (int i = 0; output && i < (int) finishedViruses.size(); ++i) {
+                output = finishedViruses[i];
         }
     return output;
 }
@@ -274,3 +280,9 @@ Tree* Session::BFS(int nodeInd) {
 int Session::getCurrCycle() const {return currCycle;}
 
 bool Session::isQueueEmpty() {return infectedQueue.empty();}
+
+void Session::updateFinishedViruses(){
+    finishedViruses.pop_back();
+}
+
+

@@ -21,7 +21,7 @@ Agent* ContactTracer::clone() const {
 }
 
 
-Virus::Virus(int nodeInd):nodeInd(nodeInd),finished(false) {}
+Virus::Virus(int nodeInd):nodeInd(nodeInd), finished(false){}
 
 void Virus::act(Session& session) {
     if (!finished) {
@@ -43,8 +43,11 @@ void Virus::carryNextNeighbor(int node, Session& session) {
    if (nextHealthyNeighbor!=-1){    //return -1 if no more healthy neighbors
        session.makeCarrier(nextHealthyNeighbor);      //make the next healthy node a carrier of the Virus
    }
-   else //no more healthy neighbors
-       finished=true;
+   else {
+       //no more healthy neighbors
+       session.updateFinishedViruses();
+       finished = true;
+   }
 }
 
 Agent* Virus::clone() const {
@@ -52,6 +55,4 @@ Agent* Virus::clone() const {
 }
 
 
-bool ContactTracer::getFinished() {return true;}
 
-bool Virus::getFinished() {return finished;}
