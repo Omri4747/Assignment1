@@ -13,19 +13,19 @@ using namespace std;
  * 1. Graph CTR
  * 2. treeType
  * 3. agents list(vector) stores the Viruses & Contact tracers by pointers to the heap
- * 4. currCycle(int) for the number of the current Cycle in the simulate fuunction
+ * 4. currCycle(int) for the number of the current Cycle in the simulate function
  * 5. infectedQueue(Queue- include package in Session.h) stores the infected nodes each cycle
  */
 
-Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
-                    agents(vector<Agent*>()),currCycle(0),infectedQueue(queue<int>()){
+Session::Session(const string &path):g(vector<vector<int>>()),  treeType(),
+                    agents(vector<Agent*>()),   currCycle(0),   infectedQueue(queue<int>()){
 
     //from path- convert the json file to accessible object- see documentation of nlohman at json.hpp
     json data;
     ifstream inFileJson(path);
     inFileJson >> data;
 
-    // initializing parameters bythe values of the json config file
+    // initializing parameters by the values of the json config file
     vector<vector<int>> matrix = data["graph"];
     g = Graph(matrix);
     string whichTree = data["tree"];
@@ -45,14 +45,14 @@ Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
         else{
             Virus toAdd = Virus(data["agents"][i][1]); //Virus CTR
             addAgent(toAdd); // uses Virus clone() method to init values on the heap
-            g.makeCarrier(data["agents"][i][1]); // makes the first node carried
+            g.makeCarrier(data["agents"][i][1]); // makes the first node carrier
         }
     }
 }
 
 /**
  * Session copy CTR
- * @param _session: const reference of the Session obj
+ * @param _session: const reference of a Session obj
  * @init_member_list: initialize Session fields:
  * same as the CTR but takes the fields of the reference variable
  * for agent field- make deep copy by accessing the values on the heap

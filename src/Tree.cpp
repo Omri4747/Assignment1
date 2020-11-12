@@ -88,7 +88,7 @@ Tree * RootTree::clone() const {
 }
 int Tree::getRoot() const {return node;}
 
-vector<Tree*> Tree::getChildren() {return children;}
+vector<Tree*> Tree::getChildren() const {return children;}
 
 //CycleTree counstructor
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle){}
