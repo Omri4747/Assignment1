@@ -29,7 +29,6 @@ public:
 
 
     Graph getGraph() const;
-    vector<Agent*> getAgents() const;
     int getCurrCycle() const;
     void simulate();
     void addAgent(const Agent& agent);
