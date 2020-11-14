@@ -18,7 +18,7 @@ using namespace std;
  */
 
 Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
-                    agents(vector<Agent*>()),currCycle(0), infectedQueue(queue<int>()), finishedViruses(vector<bool>()){
+                    agents(vector<Agent*>()),currCycle(0), infectedQueue(queue<int>()), activeVirusesCount(0){
 
     //from path- convert the json file to accessible object- see documentation of nlohman at json.hpp
     json data;
@@ -44,7 +44,7 @@ Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
         }
         else{
             Virus toAdd = Virus(data["agents"][i][1]); //Virus CTR
-            finishedViruses.push_back(false);
+            activeVirusesCount++;
             addAgent(toAdd); // uses Virus clone() method to init values on the heap
             g.makeCarrier(data["agents"][i][1]); // makes the first node carrier
         }
@@ -61,7 +61,7 @@ Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
 
 Session::Session(const Session& _session):g(_session.g),treeType(_session.treeType),agents(vector<Agent *>()),
                                             currCycle(_session.currCycle),infectedQueue(_session.infectedQueue),
-                                            finishedViruses(_session.finishedViruses) {
+                                            activeVirusesCount(_session.activeVirusesCount) {
     for (Agent *agent : _session.agents) {
         addAgent(*agent);
     }
@@ -76,7 +76,7 @@ Session::Session(const Session& _session):g(_session.g),treeType(_session.treeTy
 
 Session::Session(Session&& _session):g(_session.g),treeType(_session.treeType),agents(_session.agents),
                                      currCycle(_session.currCycle),infectedQueue(_session.infectedQueue),
-                                     finishedViruses(_session.finishedViruses) {
+                                     activeVirusesCount(_session.activeVirusesCount) {
     for (int i = 0; i < (int) agents.size(); ++i) {
         _session.agents[i]=nullptr;
     }
@@ -106,7 +106,7 @@ Session& Session::operator=(const Session& _session) {
         treeType = _session.treeType;
         currCycle = _session.currCycle;
         infectedQueue = _session.infectedQueue;
-        finishedViruses = _session.finishedViruses;
+        activeVirusesCount = _session.activeVirusesCount;
 
         //delete old values (agents) from the heap
         clear();
@@ -134,7 +134,7 @@ const Session& Session::operator=(Session&& _session) {
         treeType = _session.treeType;
         currCycle = _session.currCycle;
         infectedQueue = _session.infectedQueue;
-        finishedViruses = _session.finishedViruses;
+        activeVirusesCount = _session.activeVirusesCount;
 
         //delete old values (agents) from the heap
         clear();
@@ -158,7 +158,10 @@ const Session& Session::operator=(Session&& _session) {
 void Session::clear() {
     for (Agent* p : agents)  {
         // check if p(agent) is not nullptr before delete
-        if(p) delete p;
+        if(p){
+            delete p;
+            p = nullptr;
+        }
     }
 }
 
@@ -216,11 +219,11 @@ void Session::makeCarrier(int nodeInd) {
     g.makeCarrier(nodeInd);
     Virus toAdd = Virus(nodeInd);
     addAgent(toAdd);
-    finishedViruses.push_back(false);
+    activeVirusesCount++;
 }
 
 void Session::simulate() {
-    while (!finishedViruses.empty()){
+    while (activeVirusesCount!=0){
         int currAgentsSize = (int) agents.size();
         for (int i = 0; i < currAgentsSize; ++i) {
             agents[i]->act(*this);
@@ -233,14 +236,6 @@ void Session::simulate() {
     data["infected"]=g.getInfectedNodes();
     ofstream output("./output.json");
     output << data;
-}
-
-bool Session::allVirusFinished() {
-    bool output= true;
-    for (int i = 0; output && i < (int) finishedViruses.size(); ++i) {
-                output = finishedViruses[i];
-        }
-    return output;
 }
 
 int Session::dequeueInfected() {
@@ -281,8 +276,6 @@ int Session::getCurrCycle() const {return currCycle;}
 
 bool Session::isQueueEmpty() {return infectedQueue.empty();}
 
-void Session::updateFinishedViruses(){
-    finishedViruses.pop_back();
-}
+void Session::updateActiveViruses() {activeVirusesCount--;}
 
 

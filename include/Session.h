@@ -38,7 +38,7 @@ public:
     int nextHealthyNeighbor(int nodeInd);
     void makeCarrier(int nodeInd);
     bool isQueueEmpty();
-    void updateFinishedViruses();
+    void updateActiveViruses();
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
@@ -52,10 +52,9 @@ private:
     vector<Agent*> agents;
     int currCycle;
     queue<int> infectedQueue;
-    vector<bool> finishedViruses;
+    int activeVirusesCount;
 
     //methods
-    bool allVirusFinished();
     void clear();
 };
 

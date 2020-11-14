@@ -50,7 +50,11 @@ const Tree & Tree::operator=(Tree&& _Tree) {
 
 void Tree::clear() {
     for(Tree* child : children){
-        if (child) delete child;
+        if (child){
+            delete child;
+            child = nullptr;
+        }
+
     }
 }
 //Tree methods
@@ -121,8 +125,8 @@ int MaxRankTree::traceTree() {
         Tree *u = Q.front();
         Q.pop();
         for (int i = 0; i < (int) u->getChildren().size(); ++i) {
-            if (maxRank < (int) getChildren()[i]->getChildren().size()) {
-                maxRank = (int) getChildren()[i]->getChildren().size();
+            if (maxRank < (int) u->getChildren()[i]->getChildren().size()) {
+                maxRank = (int) u->getChildren()[i]->getChildren().size();
                 output = i;
             }
             Tree *nextNeighbor = u->getChildren()[i];

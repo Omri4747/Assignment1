@@ -45,7 +45,7 @@ void Virus::carryNextNeighbor(int node, Session& session) {
    }
    else {
        //no more healthy neighbors
-       session.updateFinishedViruses();
+       session.updateActiveViruses();
        finished = true;
    }
 }
