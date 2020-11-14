@@ -12,7 +12,7 @@
 //    sess.simulate();
 //    return 0;
 //}
-//
+
 #include "../include/Session.h"
 #include "../include/Tester.h"
 #include <csignal>
@@ -20,9 +20,8 @@
 using namespace std;
 
 //Coded By Ron Rachev
-
-Tester * testGenerator;
-
+class Tester;
+Tester* testGenerator;
 void signalHandler(int signal){
     std::cout << "Unknown Exception! Try running generatedTest.json Manually!" << std::endl;
     exit(signal);
@@ -30,7 +29,7 @@ void signalHandler(int signal){
 int main(int argc, char** argv){
 
 //    Session testSession("../config1.json");
-    //  testSession.simulate();
+//      testSession.simulate();
 
 
     signal(SIGSEGV,signalHandler);
