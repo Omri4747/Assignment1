@@ -36,7 +36,7 @@ Session::Session(const string &path):g(vector<vector<int>>()),treeType(),
     else
         treeType=Root;
     //initializing two types of agents- Virus & Contact tracer
-    for (int i = 0; i < (int) data["agents"].size(); ++i) {
+    for (size_t i = 0; i < data["agents"].size(); ++i) {
         string agentType = data["agents"][i][0];
         if (agentType=="C"){
             ContactTracer toAdd = ContactTracer(); //Contact tracer CTR
@@ -77,7 +77,7 @@ Session::Session(const Session& _session):g(_session.g),treeType(_session.treeTy
 Session::Session(Session&& _session):g(_session.g),treeType(_session.treeType),agents(_session.agents),
                                      currCycle(_session.currCycle),infectedQueue(_session.infectedQueue),
                                      activeVirusesCount(_session.activeVirusesCount) {
-    for (int i = 0; i < (int) agents.size(); ++i) {
+    for (size_t i = 0; i < agents.size(); ++i) {
         _session.agents[i]=nullptr;
     }
 }
@@ -125,7 +125,7 @@ Session& Session::operator=(const Session& _session) {
  * @return const reference to the re-assigned Session
  */
 
-const Session& Session::operator=(Session&& _session) {
+Session& Session::operator=(Session&& _session) {
     //check for self assignment
     if (this != &_session) {
 
@@ -143,7 +143,7 @@ const Session& Session::operator=(Session&& _session) {
         agents = _session.agents;
 
         //make the reference (Session) agents field point to nullptr
-        for (int i = 0; i < (int) _session.agents.size(); ++i) {
+        for (size_t i = 0; i < _session.agents.size(); ++i) {
             _session.agents[i] = nullptr;
         }
     }
@@ -177,7 +177,7 @@ Graph Session::getGraph() const {return g;}
  * @return: treeType field (Cycle, MaxRank, Root)
  */
 
-TreeType Session::getTreeType() const {return treeType;}
+const TreeType& Session::getTreeType() const {return treeType;}
 
 /*=========UNUSED======== */
 void Session::setGraph(const Graph &graph) {g=graph;}
@@ -207,7 +207,7 @@ int Session::nextHealthyNeighbor(int nodeInd) {return g.nextHealthyNeighbor(node
 
 void Session::disconnectNode(int toRemove) {
     vector<vector<int>> edges = g.getEdges();
-    for (int i = 0; i <(int)edges.size() ; ++i) {
+    for (size_t i = 0; i < edges.size() ; ++i) {
         edges[toRemove][i] = 0;
         edges[i][toRemove] = 0;
     }
@@ -224,13 +224,12 @@ void Session::makeCarrier(int nodeInd) {
 
 void Session::simulate() {
     while (activeVirusesCount!=0){
-        int currAgentsSize = (int) agents.size();
-        for (int i = 0; i < currAgentsSize; ++i) {
+        size_t currAgentsSize = agents.size();
+        for (size_t i = 0; i < currAgentsSize; ++i) {
             agents[i]->act(*this);
         }
         currCycle++;
     }
-
     json data;
     data["graph"]=g.getEdges();
     data["infected"]=g.getInfectedNodes();
@@ -251,15 +250,16 @@ void Session::enqueueInfected(int nodeInd) {
 
 Tree* Session::BFS(int nodeInd) {
     Tree* root = Tree::createTree(*this,nodeInd);
-    vector<vector<int>> edges = g.getEdges();
-    vector<int> colors((int)edges.size(),0); //0 for white, 1 for gray, 2 for black from BFS algorithm
+    const vector<vector<int>>& edges = g.getEdges();
+    size_t graphSize = edges.size();
+    vector<int> colors((int)graphSize,0); //0 for white, 1 for gray, 2 for black from BFS algorithm
     colors[nodeInd]=1;
     queue<Tree*> Q = queue<Tree*>();
     Q.push(root);
     while (!Q.empty()){
         Tree* u = Q.front();
         Q.pop();
-        for (int i = 0; i < (int) edges.size(); ++i) {
+        for (size_t i = 0; i < graphSize; ++i) {
             if (edges[u->getRoot()][i]==1 && colors[i]==0) { //u and i are neighbors and not visited i yet
                 colors[i] = 1;
                 Tree* nextNeighbor = Tree::createTree(*this, i);

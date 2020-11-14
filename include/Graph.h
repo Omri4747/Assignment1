@@ -13,8 +13,8 @@ public:
     void makeCarrier(int nodeInd);  //makes a node a carrier of the virus
 
     int nextHealthyNeighbor(int nodeInd);   //returns the next healthy neighbor with minimal index
-    vector<vector<int>> getEdges();     //returns the edges of the graph
-    void setEdges(vector<vector<int>> _edges);
+    const vector<vector<int>>& getEdges();     //returns the edges of the graph
+    void setEdges(const vector<vector<int>>& _edges);
     vector<int> getInfectedNodes();
 
 

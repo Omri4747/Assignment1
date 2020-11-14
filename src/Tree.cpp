@@ -13,7 +13,7 @@ Tree::Tree(const Tree& _Tree):node(_Tree.node),children(vector<Tree*>()) {
 
 //move constructor
 Tree::Tree(Tree &&_Tree):node(_Tree.node),children(_Tree.children){
-    for (int i = 0; i < (int) children.size(); ++i) {
+    for (size_t i = 0; i < children.size(); ++i) {
         _Tree.children[i]=nullptr;
     }
 }
@@ -36,12 +36,12 @@ Tree & Tree::operator=(const Tree &_Tree) {
 }
 
 //move assignment operator
-const Tree & Tree::operator=(Tree&& _Tree) {
+Tree & Tree::operator=(Tree&& _Tree) {
     if (this!=&_Tree){
         clear();
         node = _Tree.node;
         children=_Tree.children;
-        for (int i = 0; i < (int) _Tree.children.size(); ++i) {
+        for (size_t i = 0; i < _Tree.children.size(); ++i) {
             _Tree.children[i]= nullptr;
         }
     }
@@ -59,7 +59,7 @@ void Tree::clear() {
 }
 //Tree methods
 Tree* Tree::createTree(const Session& session, int rootLabel) {
-    int treeType = session.getTreeType();
+    const int& treeType = session.getTreeType();
     if (treeType==0){
         return (new CycleTree(rootLabel,session.getCurrCycle()));
     }
@@ -92,7 +92,7 @@ Tree * RootTree::clone() const {
 }
 int Tree::getRoot() const {return node;}
 
-vector<Tree*> Tree::getChildren() const {return children;}
+const vector<Tree*>& Tree::getChildren() const {return children;}
 
 //CycleTree counstructor
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle){}
@@ -118,16 +118,16 @@ MaxRankTree::MaxRankTree(int rootLabel)
 int MaxRankTree::traceTree() {
     Tree *root = this;
     int output = root->getRoot();
-    int maxRank = (int) getChildren().size();
+    size_t maxRank =  getChildren().size();
     queue<Tree *> Q = queue<Tree *>();
     Q.push(root);
     while (!Q.empty()) {
         Tree *u = Q.front();
         Q.pop();
-        for (int i = 0; i < (int) u->getChildren().size(); ++i) {
+        for (size_t i = 0; i < u->getChildren().size(); ++i) {
             Tree *nextNeighbor = u->getChildren()[i];
-            if (maxRank < (int) nextNeighbor->getChildren().size()) {
-                maxRank = (int) nextNeighbor->getChildren().size();
+            if (maxRank < nextNeighbor->getChildren().size()) {
+                maxRank = nextNeighbor->getChildren().size();
                 output = nextNeighbor->getRoot();
             }
             Q.push(nextNeighbor);

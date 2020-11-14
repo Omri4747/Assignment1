@@ -25,7 +25,7 @@ public:
     Session(Session&& _session); //move CTR
     virtual ~Session(); //destructor
     Session & operator=(const Session &_session); //assignment operator
-    const Session& operator=(Session&& _session); //move assignment operator
+    Session& operator=(Session&& _session); //move assignment operator
 
 
     Graph getGraph() const;
@@ -41,7 +41,7 @@ public:
     void updateActiveViruses();
     void enqueueInfected(int);
     int dequeueInfected();
-    TreeType getTreeType() const;
+    const TreeType& getTreeType() const;
 
 
     

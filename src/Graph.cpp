@@ -7,7 +7,7 @@ void Graph::infectNode(int nodeInd){
     infectionList[nodeInd]=2;
 }
 
-bool Graph::isInfected(int nodeInd) {
+ bool Graph::isInfected (int nodeInd){
     return infectionList[nodeInd]==2;
 }
 
@@ -21,20 +21,20 @@ void Graph::makeCarrier(int nodeInd) {
 
 //returns the next healthy neighbor of nodeInd with minimal index
 int Graph::nextHealthyNeighbor(int nodeInd) {
-    for (int i = 0; i < (int) edges.size();i++) {
+    for (size_t i = 0; i < edges.size();i++) {
         if (edges[nodeInd][i]==1 && infectionList[i]==0)
             return i;
     }
     return -1;
 }
 
-vector<vector<int>> Graph::getEdges() {return edges;}
+const vector<vector<int>>& Graph::getEdges() {return edges;}
 
-void Graph::setEdges(vector<vector<int>> _edges) {edges=_edges;}
+void Graph::setEdges(const vector<vector<int>>& _edges) {edges=_edges;}
 
 vector<int> Graph::getInfectedNodes() {
     vector<int> output = vector<int>();
-    for (int i = 0; i < (int)infectionList.size(); ++i) {
+    for (std::size_t i = 0; i < infectionList.size(); ++i) {
         if (infectionList[i]==2)
             output.push_back(i);
     }
