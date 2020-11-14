@@ -277,5 +277,3 @@ int Session::getCurrCycle() const {return currCycle;}
 bool Session::isQueueEmpty() {return infectedQueue.empty();}
 
 void Session::updateActiveViruses() {activeVirusesCount--;}
-
-
