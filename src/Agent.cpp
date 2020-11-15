@@ -25,7 +25,7 @@ Virus::Virus(int nodeInd):nodeInd(nodeInd), finished(false){}
 
 void Virus::act(Session& session) {
     if (!finished) {
-        if (session.getGraph().isInfected(nodeInd)) {// node is sick
+        if (session.isInfected(nodeInd)) {// node is sick
             carryNextNeighbor(nodeInd, session);
         } else {            //node is a carrier
             infectCurrentNode(nodeInd, session);

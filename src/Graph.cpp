@@ -30,8 +30,6 @@ int Graph::nextHealthyNeighbor(int nodeInd) {
 
 const vector<vector<int>>& Graph::getEdges() {return edges;}
 
-void Graph::setEdges(const vector<vector<int>>& _edges) {edges=_edges;}
-
 vector<int> Graph::getInfectedNodes() {
     vector<int> output = vector<int>();
     for (std::size_t i = 0; i < infectionList.size(); ++i) {
@@ -40,3 +38,7 @@ vector<int> Graph::getInfectedNodes() {
     }
     return output;
 }
+
+void Graph::removeEdge(int i, int j) {edges[i][j]=0;}
+
+int Graph::graphSize() {return (int) edges.size();}

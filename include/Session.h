@@ -28,7 +28,6 @@ public:
     Session& operator=(Session&& _session); //move assignment operator
 
 
-    Graph getGraph() const;
     int getCurrCycle() const;
     void simulate();
     void addAgent(const Agent& agent);
@@ -42,6 +41,7 @@ public:
     void enqueueInfected(int);
     int dequeueInfected();
     const TreeType& getTreeType() const;
+    bool isInfected (int nodeInd);
 
 
     

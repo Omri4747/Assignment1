@@ -14,8 +14,9 @@ public:
 
     int nextHealthyNeighbor(int nodeInd);   //returns the next healthy neighbor with minimal index
     const vector<vector<int>>& getEdges();     //returns the edges of the graph
-    void setEdges(const vector<vector<int>>& _edges);
     vector<int> getInfectedNodes();
+    void removeEdge(int i, int j);
+    int graphSize();
 
 
 private:

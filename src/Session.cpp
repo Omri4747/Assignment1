@@ -165,12 +165,6 @@ void Session::clear() {
     }
 }
 
-/**
- * public const getter method
- * @return: Graph field
- */
-
-Graph Session::getGraph() const {return g;}
 
 /**
  * public const getter method
@@ -206,14 +200,12 @@ int Session::nextHealthyNeighbor(int nodeInd) {return g.nextHealthyNeighbor(node
  */
 
 void Session::disconnectNode(int toRemove) {
-    vector<vector<int>> edges = g.getEdges();
-    for (size_t i = 0; i < edges.size() ; ++i) {
-        edges[toRemove][i] = 0;
-        edges[i][toRemove] = 0;
+    int edgesSize = g.graphSize();
+    for (int i = 0; i < edgesSize ; ++i) {
+        g.removeEdge(i,toRemove);
+        g.removeEdge(toRemove,i);
     }
-    g.setEdges(edges);
 }
-
 
 void Session::makeCarrier(int nodeInd) {
     g.makeCarrier(nodeInd);
@@ -277,3 +269,5 @@ int Session::getCurrCycle() const {return currCycle;}
 bool Session::isQueueEmpty() {return infectedQueue.empty();}
 
 void Session::updateActiveViruses() {activeVirusesCount--;}
+
+bool Session::isInfected(int nodeInd) {return g.isInfected(nodeInd);}
