@@ -18,7 +18,7 @@ public:
 
     void addChild(const Tree& child);   //add a child to the tree
     void addChild(Tree* child);
-    const vector<Tree*>& getChildren() const ;        //returns the children field
+    const vector<Tree*>& getChildren() const;        //returns the children field
 
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
