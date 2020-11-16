@@ -1,4 +1,7 @@
 #include "../include/Agent.h"
+#include "../include/Tree.h"
+#include "../include/Session.h"
+
 
 Agent::Agent() {}
 

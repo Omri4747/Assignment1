@@ -4,13 +4,13 @@
 #include <string>
 #include <queue>
 #include "Graph.h"
-#include "Agent.h"
-#include "Tree.h"
+
 #include "json.hpp"
 using namespace std;
 
 class Agent;
 class Tree;
+class Graph;
 
 enum TreeType{
   Cycle,

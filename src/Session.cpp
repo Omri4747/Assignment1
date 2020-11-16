@@ -1,4 +1,6 @@
 #include "../include/Session.h"
+#include "../include/Agent.h"
+#include "../include/Tree.h"
 #include <iostream>
 #include <fstream>
 
@@ -241,27 +243,7 @@ void Session::enqueueInfected(int nodeInd) {
 }
 
 Tree* Session::BFS(int nodeInd) {
-    Tree* root = Tree::createTree(*this,nodeInd);
-    const vector<vector<int>>& edges = g.getEdges();
-    size_t graphSize = edges.size();
-    vector<int> colors((int)graphSize,0); //0 for white, 1 for gray, 2 for black from BFS algorithm
-    colors[nodeInd]=1;
-    queue<Tree*> Q = queue<Tree*>();
-    Q.push(root);
-    while (!Q.empty()){
-        Tree* u = Q.front();
-        Q.pop();
-        for (size_t i = 0; i < graphSize; ++i) {
-            if (edges[u->getRoot()][i]==1 && colors[i]==0) { //u and i are neighbors and not visited i yet
-                colors[i] = 1;
-                Tree* nextNeighbor = Tree::createTree(*this, i);
-                u->addChild(nextNeighbor);
-                Q.push(nextNeighbor);
-            }
-        }
-        colors[u->getRoot()]=2;
-    }
-    return root;
+    return g.BFS(*this, nodeInd);
 }
 
 int Session::getCurrCycle() const {return currCycle;}

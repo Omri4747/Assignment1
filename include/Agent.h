@@ -1,10 +1,8 @@
 #ifndef AGENT_H_
 #define AGENT_H_
 #include <vector>
-#include "Tree.h"
 #include <queue>
 #include <iostream>
-#include "Session.h"
 
 class Session;
 

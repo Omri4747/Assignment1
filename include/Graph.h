@@ -1,6 +1,8 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 #include <vector>
+class Tree;
+class Session;
 using namespace std;
 
 class Graph{
@@ -17,6 +19,7 @@ public:
     vector<int> getInfectedNodes();
     void removeEdge(int i, int j);
     int graphSize();
+    Tree* BFS(Session& session, int nodeInd);
 
 
 private:

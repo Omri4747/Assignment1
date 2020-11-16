@@ -1,7 +1,5 @@
 #ifndef TREE_H_
 #define TREE_H_
-#include "Session.h"
-#include "Graph.h"
 #include <vector>
 
 using namespace std;
