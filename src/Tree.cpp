@@ -91,20 +91,22 @@ Tree * RootTree::clone() const {
 }
 int Tree::getRoot() const {return node;}
 
-const vector<Tree*>& Tree::getChildren() const {return children;}
+int Tree::getChildrenNum() const{return (int) children.size();}
+
+const Tree& Tree::getChild(int nodeInd) const{return *children[nodeInd];}
 
 //CycleTree counstructor
 CycleTree::CycleTree(int rootLabel, int currCycle):Tree(rootLabel),currCycle(currCycle){}
 
 int CycleTree::traceTree() {
-    Tree* curr = this;
+    const Tree* curr = this;
     int cycles = currCycle;
     while (cycles>0){
-        if ((int) curr->getChildren().size()==0)
+        if (curr->getChildrenNum()==0)
             return curr->getRoot();
         else{
             cycles--;
-            curr = curr->getChildren()[0];
+            curr = &(curr->getChild(0));
         }
     }
     return curr->getRoot();
@@ -117,16 +119,16 @@ MaxRankTree::MaxRankTree(int rootLabel)
 int MaxRankTree::traceTree() {
     Tree *root = this;
     int output = root->getRoot();
-    size_t maxRank =  getChildren().size();
-    queue<Tree *> Q = queue<Tree *>();
+    int maxRank =  getChildrenNum();
+    queue<const Tree *> Q = queue<const Tree *>();
     Q.push(root);
     while (!Q.empty()) {
-        Tree *u = Q.front();
+        const Tree *u = Q.front();
         Q.pop();
-        for (size_t i = 0; i < u->getChildren().size(); ++i) {
-            Tree *nextNeighbor = u->getChildren()[i];
-            if (maxRank < nextNeighbor->getChildren().size()) {
-                maxRank = nextNeighbor->getChildren().size();
+        for (int i = 0; i < u->getChildrenNum(); ++i) {
+            const Tree *nextNeighbor = &u->getChild(i);
+            if (maxRank < nextNeighbor->getChildrenNum()) {
+                maxRank = nextNeighbor->getChildrenNum();
                 output = nextNeighbor->getRoot();
             }
             Q.push(nextNeighbor);
