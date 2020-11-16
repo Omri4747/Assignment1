@@ -45,7 +45,7 @@ void Graph::removeEdge(int i, int j) {edges[i][j]=0;}
 
 int Graph::graphSize() {return (int) edges.size();}
 
-Tree * Graph::BFS(Session& session, int nodeInd) {
+Tree * Graph::BFS(const Session& session, int nodeInd) {
     Tree* root = Tree::createTree(session,nodeInd);
     size_t graphSize = edges.size();
     vector<int> colors((int)graphSize,0); //0 for white, 1 for gray, 2 for black from BFS algorithm

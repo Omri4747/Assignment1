@@ -19,7 +19,7 @@ public:
     vector<int> getInfectedNodes();
     void removeEdge(int i, int j);
     int graphSize();
-    Tree* BFS(Session& session, int nodeInd);
+    Tree* BFS(const Session& session, int nodeInd);
 
 
 private:
