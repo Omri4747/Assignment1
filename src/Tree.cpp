@@ -41,9 +41,7 @@ Tree & Tree::operator=(Tree&& _Tree) {
         clear();
         node = _Tree.node;
         children=_Tree.children;
-        for (size_t i = 0; i < _Tree.children.size(); ++i) {
-            _Tree.children[i]= nullptr;
-        }
+        _Tree.children.clear();
     }
     return *this;
 }
@@ -52,10 +50,9 @@ void Tree::clear() {
     for(Tree* child : children){
         if (child){
             delete child;
-            child = nullptr;
         }
-
     }
+    children.clear();
 }
 //Tree methods
 Tree* Tree::createTree(const Session& session, int rootLabel) {
