@@ -11,7 +11,6 @@ public:
 
     void infectNode(int nodeInd);   //Infect the node
     bool isInfected(int nodeInd);   //checks if the node is infected
-    bool isCarrier(int nodeInd);    //checks if the node is a carrier
     void makeCarrier(int nodeInd);  //makes a node a carrier of the virus
 
     int nextHealthyNeighbor(int nodeInd);   //returns the next healthy neighbor with minimal index

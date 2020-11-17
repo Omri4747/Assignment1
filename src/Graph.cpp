@@ -3,7 +3,7 @@
 #include "../include/Session.h"
 
 //constructor, everyone are healthy at the start (0 at infectin list is healthy)
-Graph::Graph(vector<vector<int>> matrix):edges(matrix),infectionList(vector<int>((int)edges.size(), 0)){}
+Graph::Graph(vector<vector<int>> matrix):edges(matrix),infectionList(vector<int>(edges.size(), 0)){}
 
 void Graph::infectNode(int nodeInd){
     infectionList[nodeInd]=2;
@@ -11,10 +11,6 @@ void Graph::infectNode(int nodeInd){
 
  bool Graph::isInfected (int nodeInd){
     return infectionList[nodeInd]==2;
-}
-
-bool Graph::isCarrier(int nodeInd) {
-    return infectionList[nodeInd]==1;
 }
 
 void Graph::makeCarrier(int nodeInd) {
@@ -43,19 +39,19 @@ vector<int> Graph::getInfectedNodes() {
 
 void Graph::removeEdge(int i, int j) {edges[i][j]=0;}
 
-int Graph::graphSize() {return (int) edges.size();}
+int Graph::graphSize() {return edges.size();}
 
 Tree * Graph::BFS(const Session& session, int nodeInd) {
     Tree* root = Tree::createTree(session,nodeInd);
-    size_t graphSize = edges.size();
-    vector<int> colors((int)graphSize,0); //0 for white, 1 for gray, 2 for black from BFS algorithm
+    int verticesSize = graphSize();
+    vector<int> colors(verticesSize,0); //0 for white, 1 for gray, 2 for black from BFS algorithm
     colors[nodeInd]=1;
     queue<Tree*> Q = queue<Tree*>();
     Q.push(root);
     while (!Q.empty()){
         Tree* u = Q.front();
         Q.pop();
-        for (size_t i = 0; i < graphSize; ++i) {
+        for (int i = 0; i < verticesSize; ++i) {
             if (edges[u->getRoot()][i]==1 && colors[i]==0) { //u and i are neighbors and not visited i yet
                 colors[i] = 1;
                 Tree* nextNeighbor = Tree::createTree(session, i);

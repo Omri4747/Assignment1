@@ -144,10 +144,8 @@ Session& Session::operator=(Session&& _session) {
         //init agents value
         agents = _session.agents;
 
-        //make the reference (Session) agents field point to nullptr
-        for (size_t i = 0; i < _session.agents.size(); ++i) {
-            _session.agents[i] = nullptr;
-        }
+        //clear the reference session agents list
+        _session.agents.clear();
     }
     return *this;
 }
@@ -162,9 +160,9 @@ void Session::clear() {
         // check if p(agent) is not nullptr before delete
         if(p){
             delete p;
-            p = nullptr;
         }
     }
+    agents.clear();
 }
 
 

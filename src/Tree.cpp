@@ -91,7 +91,7 @@ Tree * RootTree::clone() const {
 }
 int Tree::getRoot() const {return node;}
 
-int Tree::getChildrenNum() const{return (int) children.size();}
+int Tree::getChildrenNum() const{return children.size();}
 
 const Tree& Tree::getChild(int nodeInd) const{return *children[nodeInd];}
 
