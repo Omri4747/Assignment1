@@ -15,9 +15,7 @@ Tree::Tree(const Tree& _Tree):node(_Tree.node),children(vector<Tree*>()) {
 
 //move constructor
 Tree::Tree(Tree &&_Tree):node(_Tree.node),children(_Tree.children){
-    for (size_t i = 0; i < children.size(); ++i) {
-        _Tree.children[i]=nullptr;
-    }
+    _Tree.children.clear();
 }
 
 //destructor
@@ -79,15 +77,15 @@ void Tree::addChild(Tree* child) {
 }
 
 Tree * CycleTree::clone() const {
-    return new CycleTree(getRoot(),currCycle);
+    return new CycleTree(*this);
 }
 
 Tree * MaxRankTree::clone() const {
-    return new MaxRankTree(getRoot());
+    return new MaxRankTree(*this);
 }
 
 Tree * RootTree::clone() const {
-    return new RootTree(getRoot());
+    return new RootTree(*this);
 }
 int Tree::getRoot() const {return node;}
 
